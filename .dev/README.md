@@ -95,7 +95,7 @@ docker-compose -f .dev/docker-compose.yml up -d --build
 環境を停止するには、次のように docker compose を実行します。
 
 ```
-docker compose -f .dev/docker-compose.yml down
+docker-compose -f .dev/docker-compose.yml down
 ```
 
 ### 4.3. バイナリの操作

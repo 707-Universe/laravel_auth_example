@@ -23,7 +23,7 @@ docker-compose -f .dev/docker-compose.yml up -d --build
 #### 1.1. Dockerコンテナを停止したい場合
 
 ```
-docker compose -f .dev/docker-compose.yml down
+docker-compose -f .dev/docker-compose.yml down
 ```
 
 上記のコマンドを実行する。
