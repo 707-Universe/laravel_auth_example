@@ -1,0 +1,70 @@
+services:
+  php-fpm:
+    container_name: laravel-dev-php
+    build:
+      context: ./php
+      dockerfile: Dockerfile
+      args:
+        - UID=${USRID:-1000}
+        - GID=${GRPID:-1000}
+    ports:
+      - 5173:5173
+    volumes:
+      - ../:/home/laravel/app
+    networks:
+      - laravel-dev
+
+  nginx:
+    container_name: laravel-dev-nginx
+    image: nginx:stable
+    ports:
+      - '80:80'
+    volumes:
+      - ./nginx/conf.d/dev.conf:/etc/nginx/conf.d/dev.conf
+      - ../:/home/laravel/app
+    networks:
+      - laravel-dev
+
+  db:
+    image: mariadb:10.9
+    container_name: laravel-dev-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: laravel
+      MYSQL_DATABASE: laravel
+      MYSQL_USER: laravel
+      MYSQL_PASSWORD: laravel
+    ports:
+      - "3306:3306"
+    volumes:
+      - laravel-dev-mysql:/var/lib/mysql
+    networks:
+      - laravel-dev
+
+  adminer:
+    container_name: laravel-dev-adminer
+    build:
+      context: ./adminer
+      dockerfile: Dockerfile
+    environment:
+      ADMINER_PLUGINS: tables-filter
+      ADMINER_DESIGN: konya
+    ports:
+      - '8080:8080'
+    networks:
+      - laravel-dev
+
+  mail:
+    container_name: laravel-dev-mailpit
+    image: axllent/mailpit:latest
+    restart: always
+    ports:
+      - 1025:1025
+      - 8025:8025
+    networks:
+      - laravel-dev
+
+networks:
+  laravel-dev:
+
+volumes:
+  laravel-dev-mysql:
