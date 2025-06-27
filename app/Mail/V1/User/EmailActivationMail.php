@@ -26,7 +26,7 @@ class EmailActivationMail extends Mailable
      */
     public function envelope(): Envelope
     {
-        return new Envelope(subject: '【'.config('app_name').'】新規会員登録のご案内');
+        return new Envelope(subject: '【'.config('app.name').'】新規会員登録のご案内');
     }
 
     /**
