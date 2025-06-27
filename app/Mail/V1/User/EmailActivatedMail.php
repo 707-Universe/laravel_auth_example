@@ -2,7 +2,6 @@
 
 namespace App\Mail\V1\User;
 
-use App\Models\EmailActivationToken;
 use App\Models\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
@@ -10,21 +9,18 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class EmailActivationMail extends Mailable
+class EmailActivatedMail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    private array $user;
-
-    private array $emailActivationToken;
+    private User $user;
 
     /**
      * Create a new message instance.
      */
-    public function __construct(array $user, array $emailActivationToken)
+    public function __construct(User $user)
     {
         $this->user = $user;
-        $this->emailActivationToken = $emailActivationToken;
     }
 
     /**
@@ -32,7 +28,7 @@ class EmailActivationMail extends Mailable
      */
     public function envelope(): Envelope
     {
-        return new Envelope(subject: '【'.config('app.name').'】新規会員登録のご案内');
+        return new Envelope(subject: '【'.config('app.name').'】アカウントが有効化されました');
     }
 
     /**
@@ -40,9 +36,8 @@ class EmailActivationMail extends Mailable
      */
     public function content(): Content
     {
-        return new Content(markdown: 'mail.user.email_activation_mail', with: [
+        return new Content(markdown: 'mail.user.email_activated_mail', with: [
             'user' => $this->user,
-            'emailActivationToken' => $this->emailActivationToken,
         ]);
     }
 
