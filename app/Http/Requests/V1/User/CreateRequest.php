@@ -15,17 +15,13 @@ class CreateRequest extends FormRequest
 
     public function rules(): array
     {
-        /*
-         * Password
-         * Minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character:
-         */
         return [
             'name' => 'required|string|max:30',
             'email' => [
                 'required',
                 'email',
                 'max:190',
-                Rule::unique('users')->whereNot('email_verified', null),
+                Rule::unique('users')->whereNot('email_verified_at', null),
             ],
             'password' => [
                 'required',

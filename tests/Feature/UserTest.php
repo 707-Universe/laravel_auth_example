@@ -2,9 +2,7 @@
 
 namespace Tests\Feature;
 
-use App\Jobs\V1\User\SendEmailActivationMail;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Support\Facades\Queue;
 use Tests\TestCase;
 
 class UserTest extends TestCase

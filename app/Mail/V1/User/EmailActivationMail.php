@@ -42,7 +42,7 @@ class EmailActivationMail extends Mailable
     {
         return new Content(markdown: 'mail.user.email_activation_mail', with: [
             'user' => $this->user,
-            'emailActivationToken' => $this->emailActivationToken,
+            'url' => config('app.frontend_url').'user/email_activate/'.$this->emailActivationToken['token'],
         ]);
     }
 
