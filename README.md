@@ -49,3 +49,14 @@ hostsを設定すると <http://laravel.test/> というURLでLaravelにアク�
 <http://laravel.test/>
 
 Dockerコンテナの起動が完了すると、上記URLでLaravelにアクセスできるようになります。
+
+## ホスト情報
+
+## Laravel
+http://laravel.test/
+
+### Mailpit
+http://laravel.test:8025/
+
+### Adminer
+http://laravel.test:8080/
