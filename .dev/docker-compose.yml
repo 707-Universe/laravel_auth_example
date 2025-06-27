@@ -42,16 +42,13 @@ services:
 
   adminer:
     container_name: laravel-dev-adminer
-    build:
-      context: ./adminer
-      dockerfile: Dockerfile
-    environment:
-      ADMINER_PLUGINS: tables-filter
-      ADMINER_DESIGN: konya
+    image: adminer:4.7.5
     ports:
       - '8080:8080'
     networks:
       - laravel-dev
+    depends_on:
+        - db
 
   mail:
     container_name: laravel-dev-mailpit

@@ -131,7 +131,7 @@ URL: http://laravel.test/
 | DB_USER | laravel |
 | DB_PASS | laravel |
 | DB_NAME | laravel |
-| DB_HOST | db-mysql |
+| DB_HOST | db |
 | DB_PORT | 3036 |
 
 ### 5.3. Adminer
