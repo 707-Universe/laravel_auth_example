@@ -1,8 +1,0 @@
-POST http://laravel.test/v1/user/create
-Content-Type: application/json
-
-{
-    "name": "YOUKI TAKEMOTO",
-    "email": "foo@example.com",
-    "password": "$TestTest"
-}
