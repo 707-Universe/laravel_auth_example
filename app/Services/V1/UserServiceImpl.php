@@ -4,6 +4,7 @@ namespace App\Services\V1;
 
 use App\Http\Requests\V1\User\CreateRequest;
 use App\Jobs\V1\User\SendEmailActivationMail;
+use App\Mail\V1\User\EmailActivationMail;
 use App\Models\EmailActivationToken;
 use App\Models\PasswordResetToken;
 use App\Models\User;
@@ -39,12 +40,13 @@ class UserServiceImpl implements UserService
         return $user;
     }
 
-    private function deleteNotActivatedUser ($email) {
+    private function deleteNotActivatedUser($email)
+    {
         $userQuery = User::query();
         $userQuery->where('email', $email);
         $userQuery->where('email_verified_at', null);
 
-        if($userQuery->exists()) {
+        if ($userQuery->exists()) {
             $emailActivationTokenQuery = EmailActivationToken::query();
             $emailActivationTokenQuery->where('email', $email);
             $emailActivationTokenQuery->delete();
@@ -59,6 +61,6 @@ class UserServiceImpl implements UserService
 
     private function sendEmailActivationMail(User $user, EmailActivationToken $emailActivationToken): void
     {
-        SendEmailActivationMail::dispatch($user->toArray(), $emailActivationToken->toArray());
+        SendEmailActivationMail::dispatch(['email' => $user->email], ['token' => $emailActivationToken->token]);
     }
 }

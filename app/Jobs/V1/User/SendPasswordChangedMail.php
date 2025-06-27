@@ -12,12 +12,12 @@ class SendPasswordChangedMail implements ShouldQueue
 {
     use Queueable;
 
-    private User $user;
+    private array $user;
 
     /**
      * Create a new job instance.
      */
-    public function __construct(User $user)
+    public function __construct(array $user)
     {
         $this->user = $user;
     }
@@ -27,6 +27,6 @@ class SendPasswordChangedMail implements ShouldQueue
      */
     public function handle(): void
     {
-        Mail::to($this->user->email)->send(new PasswordChangedMail($this->user));
+        Mail::to($this->user['email'])->send(new PasswordChangedMail($this->user));
     }
 }

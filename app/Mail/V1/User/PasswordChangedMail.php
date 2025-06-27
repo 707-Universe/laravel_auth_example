@@ -13,12 +13,12 @@ class PasswordChangedMail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    private User $user;
+    private array $user;
 
     /**
      * Create a new message instance.
      */
-    public function __construct(User $user)
+    public function __construct(array $user)
     {
         $this->user = $user;
     }
